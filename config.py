@@ -2,7 +2,7 @@
 import os
 
 api_token = os.environ.get("API_TOKEN")
-base_url = os.environ.get("BASE_URL", "https://ganglia-dev.machaao.com")
+base_url = os.environ.get("BASE_URL", "https://ganglia.machaao.com")
 name = os.environ.get("NAME", "")
 open_api_key = os.environ.get("OPEN_API_KEY", "")
 dashbot_key = os.environ.get("DASHBOT_KEY", "")

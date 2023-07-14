@@ -64,6 +64,7 @@ def send_reply(valid: bool, text: str, user_id: str, client: str, sdk: float):
                 get_quick_reply("text", "👍", "👍"),
                 get_quick_reply("text", "❤️", "❤️"),
                 get_quick_reply("text", "😊", "😊"),
+                get_quick_reply("text", "😂", "😂"),
                 get_quick_reply("text", "😎", "😎"),
                 get_quick_reply("text", "😡", "😡"),
             ]
@@ -78,7 +79,7 @@ def send_reply(valid: bool, text: str, user_id: str, client: str, sdk: float):
                 get_quick_reply("text", "balance", "Balance")
             )
 
-        machaao.send_message(payload=msg)
+        print(machaao.send_message(payload=msg))
 
         if dashbot_key:
             send_to_dashbot(text=text, user_id=user_id, msg_type="send")
@@ -158,9 +159,15 @@ def process_response(request):
     if dashbot_key:
         send_to_dashbot(text=recv_text, user_id=sender_id, msg_type="recv")
 
-    valid_request, reply = logic.core(
-        recv_text, label, sender_id, client, sdk, action_type, _api_token
-    )
+    try:
+        valid_request, reply = logic.core(
+            recv_text, label, sender_id, client, sdk, action_type, _api_token
+        )
+    except Exception as e:
+        valid_request = False
+        reply = "Ooops! This chatbot is connected but encountered an error while replying. If this issue persists, please contact the creator or email us at connect@machaao.com."  
+        print("Error in generating reply")          
+        print(e)   
 
     send_reply(valid_request, reply, sender_id, client, eval(sdk))
 

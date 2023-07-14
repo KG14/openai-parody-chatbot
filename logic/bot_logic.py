@@ -74,7 +74,7 @@ class BotLogic:
         self.top_p = os.environ.get("TOP_P", 1.0)
         self.top_k = os.environ.get("TOP_K", 20)
         self.temp = os.environ.get("TEMPERATURE", 0.3)
-        self.max_length = os.environ.get("MAX_LENGTH", 50)
+        self.max_length = os.environ.get("MAX_LENGTH", 100)
         self.validate_bot_params()
 
     # noinspection DuplicatedCode
